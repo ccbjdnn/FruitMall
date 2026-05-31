@@ -9,6 +9,7 @@ const cartStore = useCartStore()
 const tabs = [
   { path: '/', label: '首页', icon: '🏠' },
   { path: '/cart', label: '购物车', icon: '🛒' },
+  { path: '/ai', label: '水果顾问', icon: '🍎' },
   { path: '/profile', label: '我的', icon: '👤' },
 ]
 

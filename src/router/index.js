@@ -43,6 +43,12 @@ const routes = [
     component: () => import('@/views/Merchant.vue'),
     meta: { title: '商家详情' },
   },
+  {
+    path: '/ai',
+    name: 'AIChat',
+    component: () => import('@/views/AIChat.vue'),
+    meta: { title: '水果顾问' },
+  },
 ]
 
 const router = createRouter({

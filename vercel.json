@@ -1,0 +1,21 @@
+{
+  "functions": {
+    "api/chat.js": {
+      "memory": 512,
+      "maxDuration": 30
+    },
+    "api/chat/stream.js": {
+      "memory": 512,
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/((?!api).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "DEEPSEEK_API_KEY": "@deepseek-api-key"
+  }
+}

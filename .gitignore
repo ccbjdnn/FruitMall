@@ -14,6 +14,12 @@ dist-ssr
 coverage
 *.local
 
+# 环境变量文件（包含敏感信息，不得提交到 Git）
+.env
+.env.local
+.env.production
+.env.development
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -37,3 +43,5 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+.vercel
