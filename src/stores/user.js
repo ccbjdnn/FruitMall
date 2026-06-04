@@ -6,10 +6,12 @@ const USERS_KEY = 'fruitmall_users'
 const CURRENT_USER_KEY = 'fruitmall_current_user'
 const INITIAL_BALANCE = 1000
 
+// 生成一个简单的 token
 function generateToken() {
   return 'tk_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10)
 }
 
+// 加载用户
 function loadUsers() {
   try {
     return JSON.parse(localStorage.getItem(USERS_KEY)) || []
@@ -18,14 +20,17 @@ function loadUsers() {
   }
 }
 
+// 保存用户列表
 function saveUsers(users) {
   localStorage.setItem(USERS_KEY, JSON.stringify(users))
 }
 
+// 保存当前用户信息
 function saveCurrentUser(user) {
   localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user))
 }
 
+// 加载当前用户信息
 function loadCurrentUser() {
   try {
     return JSON.parse(localStorage.getItem(CURRENT_USER_KEY)) || null
@@ -48,6 +53,7 @@ export const useUserStore = defineStore('user', () => {
 
   const isLoggedIn = computed(() => !!token.value)
 
+  // 将当前用户信息持久化到 localStorage
   function persistCurrentUser() {
     saveCurrentUser({
       username: username.value,
@@ -59,6 +65,7 @@ export const useUserStore = defineStore('user', () => {
     })
   }
 
+  // 更新用户信息+存储
   function updateProfile({ name: newName, avatar: newAvatar, bio: newBio, phone: newPhone }) {
     if (newName !== undefined) name.value = newName
     if (newAvatar !== undefined) avatar.value = newAvatar
@@ -70,6 +77,7 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  // 购买逻辑
   function deductBalance(amount) {
     if (balance.value < amount) {
       return { success: false, error: '余额不足' }
@@ -81,6 +89,7 @@ export const useUserStore = defineStore('user', () => {
     return { success: true }
   }
 
+  // 注册逻辑
   function register({ username: uname, password }) {
     const users = loadUsers()
     const exists = users.find((u) => u.username === uname)
@@ -101,6 +110,7 @@ export const useUserStore = defineStore('user', () => {
     return { success: true }
   }
 
+  // 登录逻辑
   function login({ username: uname, password }) {
     const users = loadUsers()
     const user = users.find((u) => u.username === uname && u.password === password)
@@ -130,6 +140,7 @@ export const useUserStore = defineStore('user', () => {
     return { success: true }
   }
 
+  // 退出登录
   function logout() {
     token.value = ''
     name.value = '水果达人'
@@ -142,6 +153,7 @@ export const useUserStore = defineStore('user', () => {
     localStorage.removeItem(CURRENT_USER_KEY)
   }
 
+  // 向外暴露状态和方法
   return {
     token, name, avatar, bio, phone, username, balance, isLoggedIn,
     updateProfile, deductBalance, register, login, logout,
