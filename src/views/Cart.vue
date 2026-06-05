@@ -10,19 +10,24 @@ const cartStore = useCartStore()
 const userStore = useUserStore()
 const orderStore = useOrderStore()
 
+// 选中的购物车项
 const checkedItems = computed(() => cartStore.items.filter((i) => i.checked))
 
+// 选中项的总价
 const checkedTotal = computed(() =>
   checkedItems.value.reduce((sum, i) => sum + i.price * i.quantity, 0).toFixed(2),
 )
 
+// 是否全选
 const isAllChecked = computed(() => cartStore.items.length > 0 && cartStore.items.every((i) => i.checked))
 
+// 全选/反选
 const toggleAll = () => {
   const target = !isAllChecked.value
   cartStore.items.forEach((i) => (i.checked = target))
 }
 
+// 结算逻辑
 const checkout = () => {
   if (checkedItems.value.length === 0) return
   if (!userStore.isLoggedIn) {

@@ -8,6 +8,7 @@ const router = useRouter()
 
 const merchantName = computed(() => decodeURIComponent(route.params.name))
 
+// 过滤出该商家的水果列表
 const merchantFruits = computed(() =>
   fruitsData.filter((f) => f.merchant === merchantName.value),
 )

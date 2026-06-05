@@ -35,6 +35,7 @@ const handleLogin = async () => {
   // 模拟异步
   await new Promise((r) => setTimeout(r, 300))
 
+  // 调用 store 的登录方法
   const result = userStore.login({
     username: form.value.username.trim(),
     password: form.value.password,
@@ -43,7 +44,7 @@ const handleLogin = async () => {
   loading.value = false
 
   if (result.success) {
-    const redirect = route.query.redirect || '/profile'
+    const redirect = route.query.redirect ||'/profile'
     router.push(redirect)
   } else {
     errorMsg.value = result.error
@@ -61,7 +62,7 @@ const handleLogin = async () => {
 
     <div class="login-form">
       <div class="form-logo">🍉</div>
-      <h2 class="form-title">欢迎回到鲜果时光</h2>
+      <h2 class="form-title">欢迎来到鲜果时光</h2>
 
       <div class="input-group">
         <label class="input-label">用户名</label>

@@ -16,6 +16,7 @@ const editForm = ref({
   phone: '',
 })
 
+// 头像选项
 const avatarOptions = [
   { emoji: '👦', color: '#ff6b6b' },
   { emoji: '👧', color: '#ff8e53' },
@@ -29,8 +30,10 @@ const avatarOptions = [
 
 const selectedAvatarIndex = ref(-1)
 
+// 判断字符串是否为 Data URL
 const isDataUrl = (str) => typeof str === 'string' && str.startsWith('data:image/')
 
+// 开始编辑
 const startEdit = () => {
   editForm.value = {
     name: userStore.name,
@@ -46,6 +49,7 @@ const startEdit = () => {
   isEditing.value = true
 }
 
+// 选择预设头像
 const selectAvatar = (index) => {
   selectedAvatarIndex.value = index
   editForm.value.avatar = avatarOptions[index].emoji
@@ -56,6 +60,7 @@ const triggerUpload = () => {
   fileInputRef.value?.click()
 }
 
+// 处理文件选择
 const handleFileChange = (e) => {
   const file = e.target.files?.[0]
   if (!file) return
@@ -76,6 +81,7 @@ const handleFileChange = (e) => {
   e.target.value = ''
 }
 
+// 保存资料
 const saveProfile = () => {
   userStore.updateProfile({
     name: editForm.value.name,
@@ -86,15 +92,18 @@ const saveProfile = () => {
   isEditing.value = false
 }
 
+// 取消编辑
 const cancelEdit = () => {
   isEditing.value = false
 }
 
+// 退出登录
 const handleLogout = () => {
   userStore.logout()
   isEditing.value = false
 }
 
+// 格式化日期
 const formatDate = (iso) => {
   const d = new Date(iso)
   const pad = (n) => String(n).padStart(2, '0')

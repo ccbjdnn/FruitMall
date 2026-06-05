@@ -12,6 +12,7 @@ const userStore = useUserStore()
 
 const allFruits = fruitsData
 
+// 根据路由参数获取当前水果详情
 const fruit = computed(() => {
   const id = Number(route.params.id)
   return allFruits.find((f) => f.id === id) || null
@@ -25,18 +26,23 @@ if (fruit.value) {
   selectedSpec.value = fruit.value.specs[0]
 }
 
+// 计算总价
 const totalPrice = computed(() => {
   if (!fruit.value || !selectedSpec.value) return 0
   return (selectedSpec.value.price * quantity.value).toFixed(2)
 })
 
+//减少数量
 const decreaseQty = () => {
   if (quantity.value > 1) quantity.value--
 }
+
+//增加数量
 const increaseQty = () => {
   if (quantity.value < 99) quantity.value++
 }
 
+// 需要登录才能操作
 const requireLogin = () => {
   if (!userStore.isLoggedIn) {
     const currentPath = route.fullPath
@@ -46,6 +52,7 @@ const requireLogin = () => {
   return true
 }
 
+// 加入购物车
 const addToCart = () => {
   if (!fruit.value) return
   if (!requireLogin()) return
@@ -53,6 +60,7 @@ const addToCart = () => {
   showToast(`已加入购物车 (${selectedSpec.value.label} x${quantity.value})`)
 }
 
+// 立即购买
 const buyNow = () => {
   if (!fruit.value) return
   if (!requireLogin()) return

@@ -18,6 +18,7 @@ const loading = ref(false)
 const handleRegister = async () => {
   errorMsg.value = ''
 
+  // 基本验证
   if (!form.value.username.trim()) {
     errorMsg.value = '请输入用户名'
     return

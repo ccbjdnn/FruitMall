@@ -13,6 +13,7 @@ const tabs = [
   { path: '/profile', label: '我的', icon: '👤' },
 ]
 
+// 显示控制
 const isTabPage = computed(() => tabs.some((t) => t.path === route.path))
 
 const isActive = (path) => route.path === path

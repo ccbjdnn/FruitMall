@@ -8,6 +8,7 @@ const router = useRouter()
 
 const cartStore = useCartStore()
 
+//分类列表，自动从水果数据中提取
 const categories = computed(() => {
   const set = new Set(fruits.value.map((f) => f.category))
   return ['全部', ...Array.from(set)]
@@ -17,6 +18,7 @@ const searchKeyword = ref('')
 
 const fruits = ref(fruitsData)
 
+//根据分类和搜索关键词过滤水果列表
 const filteredFruits = computed(() => {
   let list = fruits.value
   if (activeCategory.value !== '全部') {
@@ -31,10 +33,12 @@ const filteredFruits = computed(() => {
   return list
 })
 
+// 加入购物车
 const addToCart = (fruit) => {
   cartStore.addItem(fruit)
 }
 
+// Toast 提示
 const toastMsg = ref('')
 let toastTimer = null
 const showToast = (msg) => {
