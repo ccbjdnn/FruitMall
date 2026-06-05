@@ -55,6 +55,7 @@ export async function chatWithAI(messages) {
  * @param {(error: string) => void} callbacks.onError - 发生错误时调用
  * @returns {AbortController} 可用于中断请求的控制器
  */
+
 export function chatWithAIStream(messages, callbacks) {
   const { onChunk, onDone, onError } = callbacks
 

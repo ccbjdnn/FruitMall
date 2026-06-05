@@ -237,6 +237,7 @@ onBeforeUnmount(() => {
   flex-direction: column;
   height: 100vh;
   background: #f0f4f0;
+  padding-bottom: 60px;
 }
 
 /* ========== 顶部标题栏 ========== */
